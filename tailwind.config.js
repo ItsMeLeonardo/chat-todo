@@ -9,7 +9,15 @@ module.exports = {
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
-    extend: {},
+
+    extend: {
+      boxShadow: {
+        '3xl': "rgba(0, 0, 0, 0.1) 0px 10px 50px"
+      },
+      colors: {
+        secondary: "#f97316"
+      }
+    },
   },
   darkMode: "class",
   plugins: [nextui()],
