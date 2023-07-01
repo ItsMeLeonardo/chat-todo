@@ -4,6 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 type UseUserReturn = {
   user?: User;
+  logout: () => void;
 };
 
 function getUserFromFirebaseUser(
@@ -22,7 +23,10 @@ function getUserFromFirebaseUser(
 export function useUser(): UseUserReturn {
   const [firebaseUser] = useAuthState(authApp);
 
+  const logout = () => authApp.signOut();
+
   return {
     user: getUserFromFirebaseUser(firebaseUser),
+    logout,
   };
 }
