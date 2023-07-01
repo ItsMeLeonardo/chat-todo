@@ -1,10 +1,13 @@
 "use client";
-import { Avatar } from "@nextui-org/avatar";
+import { Avatar } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
 
 import { ROUTES } from "./PageOptionButtons";
+import { useUser } from "@/hooks/useUser";
 
 export default function Navbar() {
+  const { user } = useUser();
+
   const pathname = usePathname();
 
   const label = ROUTES.find(({ href }) => pathname.includes(href))?.label;
@@ -17,7 +20,10 @@ export default function Navbar() {
       </h1>
 
       <Avatar
-        src="https://images.unsplash.com/photo-1688019984360-50d40dfa955a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60"
+        imgProps={{
+          referrerPolicy: "no-referrer",
+        }}
+        src={user?.avatar}
         size="xs"
         isBordered
         color="danger"

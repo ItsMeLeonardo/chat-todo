@@ -15,7 +15,7 @@ export default function ConversationItem(props: ConversationItemProps) {
   return (
     <Link
       href={`/conversation/${username}`}
-      className="flex w-full items-center gap-2 p-2 md:p-4 rounded-2xl bg-white cursor-pointer"
+      className="flex w-full items-center gap-2 p-2 md:p-4 rounded-2xl bg-white cursor-pointer hover:bg-content2"
     >
       <Avatar src={avatar} />
       <div className="flex flex-col flex-grow">
