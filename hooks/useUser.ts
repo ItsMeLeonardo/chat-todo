@@ -1,5 +1,6 @@
 import { FirebaseUser, authApp } from "@/services/auth";
 import { User } from "@/types/user";
+import { useRouter } from "next/navigation";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 type UseUserReturn = {
@@ -7,7 +8,7 @@ type UseUserReturn = {
   logout: () => void;
 };
 
-function getUserFromFirebaseUser(
+export function getUserFromFirebaseUser(
   firebaseUser?: FirebaseUser | null
 ): User | undefined {
   if (!firebaseUser) return undefined;
@@ -23,7 +24,13 @@ function getUserFromFirebaseUser(
 export function useUser(): UseUserReturn {
   const [firebaseUser] = useAuthState(authApp);
 
-  const logout = () => authApp.signOut();
+  const router = useRouter();
+
+  const logout = () => {
+    authApp.signOut().then(() => {
+      router.push("/");
+    });
+  };
 
   return {
     user: getUserFromFirebaseUser(firebaseUser),

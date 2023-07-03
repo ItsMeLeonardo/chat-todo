@@ -3,7 +3,6 @@ import { title, subtitle } from "@/components/primitives";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import NextLink from "next/link";
 import { auth, authApp } from "@/services/auth";

@@ -1,9 +1,12 @@
 import ProjectCard from "@/components/Projects/ProjectCard";
 import AddIcon from "@/icons/AddIcon";
+import { getProjects } from "@/services/db/project";
 import { Button } from "@nextui-org/button";
 import Link from "next/link";
 
-export default function ProjectPage() {
+export default async function ProjectPage() {
+  const projects = await getProjects();
+
   return (
     <div className="flex gap-2 flex-col overflow-auto h-full p-1">
       <header className="flex justify-between items-center">
@@ -18,12 +21,10 @@ export default function ProjectPage() {
           <AddIcon />
         </Button>
       </header>
-      <ProjectCard />
-      <ProjectCard />
-      <ProjectCard />
-      <ProjectCard />
-      <ProjectCard />
-      <ProjectCard />
+
+      {projects.map((project) => (
+        <ProjectCard key={project.id} project={project} />
+      ))}
     </div>
   );
 }
