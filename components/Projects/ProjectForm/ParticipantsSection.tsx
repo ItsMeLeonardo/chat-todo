@@ -1,6 +1,6 @@
 "use client";
 import { useUsers } from "@/hooks/useUsers";
-import { Avatar } from "@nextui-org/avatar";
+import { Avatar } from "@nextui-org/react";
 import {
   Dropdown,
   DropdownTrigger,

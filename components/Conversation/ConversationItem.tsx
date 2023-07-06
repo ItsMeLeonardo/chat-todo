@@ -1,5 +1,5 @@
 import { timeAgo } from "@/utils/date";
-import { Avatar } from "@nextui-org/avatar";
+import { Avatar } from "@nextui-org/react";
 import Link from "next/link";
 
 export type ConversationItemProps = {

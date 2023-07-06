@@ -12,12 +12,15 @@ import { Task } from "@/types/tasks";
 import { addProject } from "@/services/db/db";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import DurationSection from "./DurationSection";
 
 export type FormProjectValues = {
   title: string;
   description: string;
   participants: User[];
   tasks: Task[];
+  startDate: Date;
+  endDate: Date;
 };
 
 export default function ProjectForm() {
@@ -80,6 +83,8 @@ export default function ProjectForm() {
           label="Descripción del proyecto"
           {...register("description")}
         />
+
+        <DurationSection />
 
         <ParticipantsSection />
         <TaskSections />

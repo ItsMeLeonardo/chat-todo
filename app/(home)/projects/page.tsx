@@ -4,6 +4,8 @@ import { getProjects } from "@/services/db/project";
 import { Button } from "@nextui-org/button";
 import Link from "next/link";
 
+export const revalidate = 0;
+
 export default async function ProjectPage() {
   const projects = await getProjects();
 

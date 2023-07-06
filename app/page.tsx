@@ -8,6 +8,8 @@ import NextLink from "next/link";
 import { auth, authApp } from "@/services/auth";
 import { redirect } from "next/navigation";
 
+export const revalidate = 0;
+
 export default function MainPage() {
   const [user] = useAuthState(authApp);
 

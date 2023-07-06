@@ -2,7 +2,7 @@
 
 import Folder2Icon from "@/icons/Folder2Icon";
 import { Project } from "@/types/projects";
-import { Avatar, AvatarGroup } from "@nextui-org/avatar";
+import { Avatar, AvatarGroup } from "@nextui-org/react";
 import { Progress } from "@nextui-org/react";
 import Link from "next/link";
 

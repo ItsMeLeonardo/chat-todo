@@ -1,6 +1,6 @@
 "use client";
 import EyeSlashIcon from "@/icons/EyeSlashIcon";
-import { Avatar } from "@nextui-org/avatar";
+import { Avatar } from "@nextui-org/react";
 import { Button } from "@nextui-org/button";
 import { useState } from "react";
 

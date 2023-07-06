@@ -1,6 +1,8 @@
 import TaskItem from "@/components/Tasks/TaskItem";
 import TaskSummaryCart from "@/components/Tasks/TaskSummaryCart";
 
+export const revalidate = 0;
+
 export default function TasksPage() {
   return (
     <div className="w-full h-full flex flex-col gap-3 ">

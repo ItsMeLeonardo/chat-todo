@@ -1,6 +1,7 @@
 import { timeAgo } from "@/utils/date";
-import { Avatar } from "@nextui-org/avatar";
 import clsx from "clsx";
+
+import Avatar from "@/components/AvatarClient";
 
 export type MessageProps = {
   content: string;

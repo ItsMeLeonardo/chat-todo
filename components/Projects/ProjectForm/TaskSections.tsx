@@ -1,23 +1,28 @@
 "use client";
 import { Task } from "@/types/tasks";
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import AddIcon from "@/icons/AddIcon";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
-import TaskItem from "@/components/Tasks/TaskItem";
 import { useFormContext } from "react-hook-form";
 import { FormProjectValues } from ".";
 import TrashIcon from "@/icons/TrashIcon";
+import TaskItemForm from "@/components/Tasks/TaskItemForm";
+import CalendarIcon from "@/icons/CalendarIcon";
+import { getDuration } from "@/utils/date";
+import EditTaskForm from "@/components/Tasks/EditTaskForm";
 
 type Props = {
   tasks?: Task[];
 };
 
 export default function TaskSections(props: Props) {
-  const { register, setValue } = useFormContext<FormProjectValues>();
+  const { register, setValue, getValues } = useFormContext<FormProjectValues>();
 
   const [tasks, setTasks] = useState<Task[]>(props.tasks ?? []);
+
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
 
   const [taskTitle, setTaskTitle] = useState("");
 
@@ -32,16 +37,25 @@ export default function TaskSections(props: Props) {
   const handleAddTask = () => {
     if (!taskTitle || !taskTitle.trim().length) return;
 
+    const startDate = getValues("startDate");
+    const endDate = getValues("endDate");
+
     const newTask: Task = {
       id: crypto.randomUUID(),
       title: taskTitle,
       createdAt: Date.now(),
       updatedAt: Date.now(),
       completed: false,
+      startDate: startDate.getTime(),
+      endDate: endDate.getTime(),
     };
 
     setTasks((prev) => [newTask, ...prev]);
     setTaskTitle("");
+  };
+
+  const handleEditTask = (task: Task) => {
+    setTasks((prev) => prev.map((t) => (t.id === task.id ? task : t)));
   };
 
   const handleRemoveTask = (id: string) => {
@@ -79,7 +93,24 @@ export default function TaskSections(props: Props) {
       </div>
       {tasks.map((task) => (
         <div key={task.id} className="flex gap-2 items-center">
-          <TaskItem createdAt={task.createdAt} label={task.title} disabled />
+          <TaskItemForm
+            duration={getDuration(
+              new Date(task.startDate),
+              new Date(task.endDate)
+            )}
+            label={task.title}
+          />
+          <Button
+            isIconOnly
+            color="danger"
+            radius="xl"
+            className="text-indigo-500 bg-indigo-50 text-xl"
+            onPress={() => {
+              setSelectedTask(task);
+            }}
+          >
+            <CalendarIcon />
+          </Button>
           <Button
             isIconOnly
             color="danger"
@@ -93,6 +124,18 @@ export default function TaskSections(props: Props) {
           </Button>
         </div>
       ))}
+
+      {selectedTask && (
+        <EditTaskForm
+          open={!!selectedTask}
+          onClose={() => setSelectedTask(null)}
+          task={selectedTask}
+          onSaved={(task) => {
+            handleEditTask(task);
+            setSelectedTask(null);
+          }}
+        />
+      )}
     </div>
   );
 }

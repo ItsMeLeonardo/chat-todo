@@ -7,4 +7,6 @@ export type Task = {
   completedBy?: string; // User ID
   createdAt: number;
   updatedAt: number;
+  startDate: number;
+  endDate: number;
 };

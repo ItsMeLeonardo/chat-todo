@@ -1,5 +1,7 @@
 import ArrowLeftIcon from "@/icons/ArrowLeftIcon";
-import { User } from "@nextui-org/user";
+
+import User from "@/components/User";
+
 import { Button } from "@nextui-org/button";
 import Link from "next/link";
 import { ReactNode } from "react";
