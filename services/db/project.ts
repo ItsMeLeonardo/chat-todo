@@ -5,10 +5,14 @@ import {
   getDocs,
   doc,
   getDoc,
+  setDoc,
+  arrayUnion,
+  updateDoc,
 } from "firebase/firestore/lite";
 import { db } from "./db";
 import { addConversation } from "./conversations";
 import { Conversation } from "@/types/conversation";
+import { Task } from "@/types/tasks";
 
 export async function createProject(project: Omit<Project, "id">) {
   try {
@@ -76,5 +80,30 @@ export async function getProject(id: string): Promise<Project | null> {
   } catch (error) {
     console.error(`${error} in getProject`);
     return null;
+  }
+}
+
+export async function toggleTaskComplete(projectId: string, taskId: string) {
+  try {
+    const projectRef = doc(db, "projects", projectId);
+
+    const projectSnapshot = await getDoc(projectRef);
+    const tasks: Task[] = projectSnapshot.data()?.tasks || [];
+
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === taskId) {
+        return {
+          ...task,
+          completed: !task.completed,
+        };
+      }
+      return task;
+    });
+
+    await updateDoc(projectRef, {
+      tasks: updatedTasks,
+    });
+  } catch (error) {
+    console.error(`${error} in changeTaskState`);
   }
 }

@@ -47,7 +47,7 @@ export default async function TasksIdPage({ params }: PageProps) {
       )}
       <div className="flex flex-col gap-2 overflow-auto">
         {project?.tasks.map((task) => (
-          <TaskItem key={task.id} task={task} />
+          <TaskItem key={task.id} task={task} projectId={project.id} />
         ))}
       </div>
     </div>

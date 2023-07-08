@@ -9,7 +9,7 @@ export default async function TasksPage() {
 
   return (
     <div className="w-full h-full flex flex-col gap-3 overflow-auto pr-2">
-      <div className="w-full flex overflow-auto items-center gap-4 min-h-[120px]">
+      <div className="w-full flex overflow-auto items-center gap-4 min-h-[150px]">
         {projects.map((project) => (
           <ProjectSummaryCart
             key={project.id}
@@ -37,7 +37,7 @@ export default async function TasksPage() {
             </header>
             <div className="flex flex-col gap-2">
               {project.tasks.map((task) => (
-                <TaskItem key={task.id} task={task} />
+                <TaskItem key={task.id} task={task} projectId={project.id} />
               ))}
             </div>
           </div>

@@ -35,25 +35,29 @@ const getPinnedTaskMessage = (project: Project): string | null => {
     (endDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24)
   );
 
-  const tasks = project.tasks.filter((task) => {
-    const daysLeft = Math.floor(
-      (new Date(task.endDate).getTime() - Date.now()) / (1000 * 60 * 60 * 24)
-    );
+  const tasks = project.tasks
+    .filter((task) => !task.completed)
+    .filter((task) => {
+      const daysLeft = Math.floor(
+        (new Date(task.endDate).getTime() - Date.now()) / (1000 * 60 * 60 * 24)
+      );
 
-    return daysLeft <= 3;
-  });
+      return daysLeft <= 3;
+    });
 
   if (tasks.length > 0) {
     return `Solo quedan ${daysLeft} dias para que termine el proyecto ${project.title}, y tienes ${tasks.length} tareas atrasadas`;
   }
 
-  const tasksWithDaysLeft = project.tasks.filter((task) => {
-    const daysLeft = Math.floor(
-      (new Date(task.endDate).getTime() - Date.now()) / (1000 * 60 * 60 * 24)
-    );
+  const tasksWithDaysLeft = project.tasks
+    .filter((task) => !task.completed)
+    .filter((task) => {
+      const daysLeft = Math.floor(
+        (new Date(task.endDate).getTime() - Date.now()) / (1000 * 60 * 60 * 24)
+      );
 
-    return daysLeft <= 7;
-  });
+      return daysLeft <= 7;
+    });
 
   if (tasksWithDaysLeft.length > 0) {
     return `Solo quedan ${daysLeft} dias para que termine el proyecto ${project.title}, y tienes ${tasksWithDaysLeft.length} tareas con menos de 7 dias para terminar`;
