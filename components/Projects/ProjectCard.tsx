@@ -2,6 +2,7 @@
 
 import Folder2Icon from "@/icons/Folder2Icon";
 import { Project } from "@/types/projects";
+import { getDuration } from "@/utils/date";
 import { Avatar, AvatarGroup } from "@nextui-org/react";
 import { Progress } from "@nextui-org/react";
 import Link from "next/link";
@@ -31,9 +32,14 @@ export default function ProjectCard({ project }: Props) {
   const completedTasks = project.tasks.filter((task) => task.completed).length;
   const completeProgress = (100 * completedTasks) / project.tasks.length;
 
+  const duration = getDuration(
+    new Date(project.startDate),
+    new Date(project.endDate)
+  );
+
   return (
     <Link
-      href={`/projects/${project.id}`}
+      href={`/conversation/${project.id}`}
       className="p-3 w-full flex flex-col gap-3 rounded-xl bg-white"
     >
       <div className="flex items-center gap-2">
@@ -42,6 +48,7 @@ export default function ProjectCard({ project }: Props) {
         >
           <Folder2Icon />
         </span>
+
         <div className="flex flex-col flex-grow">
           <h3 className="text-sm font-bold my-1">{project.title}</h3>
           {project.description && (
@@ -49,6 +56,7 @@ export default function ProjectCard({ project }: Props) {
               {project.description}
             </span>
           )}
+          <span className="text-xs ">duración: {duration}</span>
         </div>
         <AvatarGroup size="sm">
           {project.participants.map((participant) => (
@@ -65,6 +73,7 @@ export default function ProjectCard({ project }: Props) {
       <Progress
         size="xs"
         radius="full"
+        label="Tareas completadas"
         classNames={{
           base: "rounded-lg w-full",
           indicator: `bg-gradient-to-r ${gradient}`,

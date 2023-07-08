@@ -9,4 +9,6 @@ export type Project = {
   participants: User[];
   createdAt: number;
   updatedAt: number;
+  endDate: number;
+  startDate: number;
 };

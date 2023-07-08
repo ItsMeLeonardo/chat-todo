@@ -9,10 +9,10 @@ import ParticipantsSection from "./ParticipantsSection";
 import { FormProvider, useForm } from "react-hook-form";
 import { User } from "@/types/user";
 import { Task } from "@/types/tasks";
-import { addProject } from "@/services/db/db";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import DurationSection from "./DurationSection";
+import { createProject } from "@/services/db/project";
 
 export type FormProjectValues = {
   title: string;
@@ -38,10 +38,15 @@ export default function ProjectForm() {
 
   const onSubmit = (data: FormProjectValues) => {
     setLoading(true);
-    addProject({
+
+    const { endDate, startDate, ...projectData } = data;
+
+    createProject({
       createdAt: Date.now(),
       updatedAt: Date.now(),
-      ...data,
+      startDate: startDate.getTime(),
+      endDate: endDate.getTime(),
+      ...projectData,
     })
       .then(() => {
         router.push("/projects");

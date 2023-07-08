@@ -14,11 +14,7 @@ export default function PinnedMessage({ message }: Props) {
   if (!show) return null;
 
   return (
-    <div className="bg-white rounded-xl p-4 w-full shadow-3xl flex gap-2">
-      <Avatar
-        name="John Doe"
-        src="https://i.pinimg.com/564x/f5/f5/dc/f5f5dc5e606721b50fa2c95f60c4fa4e.jpg"
-      />
+    <div className="bg-white rounded-xl p-2 px-4 justify-between w-full shadow-3xl flex gap-2 items-center">
       <p className="text-xs max-w-[80%] overflow-hidden line-clamp-3">
         {message}
       </p>

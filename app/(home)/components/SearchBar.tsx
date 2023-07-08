@@ -58,11 +58,11 @@ export default function SearchBar() {
                 Tareas
               </header>
               <div className="flex flex-col gap-2">
-                <TaskItem
+                {/*   <TaskItem
                   label="Tarea 1"
                   isCompleted={false}
                   createdAt={new Date().getTime()}
-                />
+                /> */}
               </div>
             </div>
           </div>

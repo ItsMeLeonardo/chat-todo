@@ -14,9 +14,13 @@ export const ROUTES = [
     label: "Mis Tareas",
   },
   {
+    href: "/notifications",
+    label: "Notificaciones",
+  },
+  /*   {
     href: "/messages",
     label: "Mensajes",
-  },
+  }, */
 ];
 
 export default function PageOptionButtons() {
